@@ -27,6 +27,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     //noinspection LifecycleAnnotationProcessorWithJava8
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 
     //room components
     implementation "androidx.room:room-runtime:$room_version"

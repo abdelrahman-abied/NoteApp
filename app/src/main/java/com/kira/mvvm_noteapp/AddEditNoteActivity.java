@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
-public class AddNoteActivity extends AppCompatActivity {
+public class AddEditNoteActivity extends AppCompatActivity {
+    public static final String EXTRA_ID=
+            "com.kira.mvvm_noteapp.EXTRA_ID";
     public static final String EXTRA_TITLE=
             "com.kira.mvvm_noteapp.EXTRA_TITLE";
     public static final String EXTRA_DESCRIPOTION=
@@ -35,8 +37,17 @@ public class AddNoteActivity extends AppCompatActivity {
         numberPickerPriority.setMinValue(1);
         numberPickerPriority.setMaxValue(10);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear);
-        setTitle("Add Note");
 
+     Intent intent=getIntent();
+     if (intent.hasExtra(EXTRA_ID)){
+         editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
+         editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPOTION));
+         numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIOTITY,1));
+         setTitle("Edit Note");
+
+     }else {
+         setTitle("Add Note");
+     }
 
     }
 
@@ -72,6 +83,11 @@ public class AddNoteActivity extends AppCompatActivity {
         data.putExtra(EXTRA_TITLE,title);
         data.putExtra(EXTRA_DESCRIPOTION,description);
         data.putExtra(EXTRA_PRIOTITY,priority);
+
+        int id=getIntent().getIntExtra(EXTRA_ID,-1);
+        if(id!=-1){
+            data.putExtra(EXTRA_ID,id);
+        }
         setResult(RESULT_OK,data);
         finish();
     }
